@@ -10,6 +10,7 @@ public class Main {
     public static void main(String[] args) {
         Funcionario[] funcionarios = new Funcionario[10];
         DecimalFormat df = new DecimalFormat("#,##0.00");
+        final double SALARIO_MINIMO = 1212.00;
 
         funcionarios[0] = new Funcionario("Maria", "18/10/2000", 2009.44, "Operador");
         funcionarios[1] = new Funcionario("João", "12/05/1990", 2284.38, "Operador");
@@ -25,7 +26,6 @@ public class Main {
 
         List<Funcionario> listaFuncionarios = Arrays.asList(funcionarios);
 
-        //Removendo João da Lista de funcionarios
         listaFuncionarios = listaFuncionarios.stream()
                 .filter(funcionario -> !funcionario.getNome().equals("João"))
                 .toList();
@@ -41,7 +41,6 @@ public class Main {
         System.out.println("----------------------------------------------");
         System.out.println();
 
-        //Aumento de 10% salarial
         listaFuncionarios = listaFuncionarios.stream()
                 .peek(funcionario -> funcionario.setSalario(funcionario.getSalario() * 1.1))
                 .toList();
@@ -75,7 +74,6 @@ public class Main {
         System.out.println("----------------------------------------------");
         System.out.println();
 
-        //Agrupar funcionários que realizam aniversario no mes 10 e 12
         Map<String, List<Funcionario>> funcionariosAniversario = listaFuncionarios.stream()
                 .filter(funcionario -> {
                     int mesAniversario = Integer.parseInt(funcionario.getDataNascimento().split("/")[1]);
@@ -100,7 +98,6 @@ public class Main {
         System.out.println("---------------------------------------------------------------------------------------------");
         System.out.println();
 
-        // Encontrar o funcionário mais velho
         Optional<Funcionario> funcionarioMaiorIdade = listaFuncionarios.stream()
                 .min((funcionario1, funcionario2) -> {
                     Date dataNascimento1 = convertData(funcionario1.getDataNascimento());
@@ -148,8 +145,6 @@ public class Main {
         System.out.println("----------------------------------------------");
         System.out.println();
 
-
-        final double SALARIO_MINIMO = 1212.00;
 
         Map<String, Double> salariosMinimosPorFuncionario = new HashMap<>();
 
